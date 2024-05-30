@@ -1,23 +1,18 @@
-from flask import Flask
-from flask import redirect
-app =Flask(__name__)
+from flask import Flask, render_template
 
-@app.route("/")
-def index():
-    return "Hola Mundo desde Flask"
+app = Flask(__name__)
 
-@app.route("/saludar")
-def saludar():
-    app.logger.info('Si efectivamente estamos aqui!!!')
-    return "Hola Perdidas"
+@app.route('/inicio')
+def inicio():
+    return render_template('pagina.html', title="Inicio Web UNIVALLE", mensaje="Hola de Nuevo")
 
-@app.route("/usuario/c")
-def user(name):
-    return "<h1>Hola:"+name+"</h1>"
+@app.route('/')
+def home():
+    return render_template('index.html', title='Pagina APP UNIVALLE')
 
-@app.route("/direccion")
-def redireccionar():
-    return redirect("http://www.univalle.edu")
+@app.route('/about')
+def about():
+    return render_template('about.html',title="Pagina acerca de Nosotros")
 
-if __name__=='main':
+if __name__=='__main__':
     app.run(debug=True)
